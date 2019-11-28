@@ -26,6 +26,7 @@
         <javax.inject.version>1</javax.inject.version>
         <springfox.swagger.version>2.9.2</springfox.swagger.version>
         <postgresql.version>42.2.8</postgresql.version>
+        <vaadin.version>14.0.13</vaadin.version>
     </properties>
 
     <modules>
@@ -35,6 +36,28 @@
         <module>war</module>
         <module>infrastructure</module>
     </modules>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <snapshots><enabled>false</enabled></snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+        <!-- Repository used by many Vaadin add-ons -->
+        <repository>
+            <id>Vaadin Directory</id>
+            <url>https://maven.vaadin.com/vaadin-addons</url>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -69,6 +92,17 @@
                 <artifactId>infrastructure</artifactId>
                 <type>test-jar</type>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.switchfully.web.development.web.frameworks.vaadin</groupId>
+                <artifactId>vaadin-14-booking-backend</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.switchfully.web.development.web.frameworks.vaadin</groupId>
+                <artifactId>vaadin-14-booking-backend</artifactId>
+                <version>${project.version}</version>
+                <type>test-jar</type>
             </dependency>
             <dependency>
                 <groupId>javax.inject</groupId>
@@ -108,35 +142,44 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <!-- skips surefire tests without skipping failsafe tests. -->
-                    <skipTests>${skip.surefire.tests}</skipTests>
-                    <excludes>
-                        <exclude>**/*IntegrationTest.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/*IntegrationTest.java</include>
-                    </includes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.vaadin</groupId>
+                    <artifactId>vaadin-maven-plugin</artifactId>
+                    <version>${vaadin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; skips surefire tests without skipping failsafe tests. &ndash;&gt;-->
+<!--                    <skipTests>${skip.surefire.tests}</skipTests>-->
+<!--                    <excludes>-->
+<!--                        <exclude>**/*IntegrationTest.java</exclude>-->
+<!--                    </excludes>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-failsafe-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <includes>-->
+<!--                        <include>**/*IntegrationTest.java</include>-->
+<!--                    </includes>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>integration-test</goal>-->
+<!--                            <goal>verify</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
     </build>
 
 </project>
