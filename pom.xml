@@ -24,7 +24,6 @@
         <skipTests>false</skipTests>
         <skip.surefire.tests>${skipTests}</skip.surefire.tests>
         <javax.inject.version>1</javax.inject.version>
-        <springfox.swagger.version>2.9.2</springfox.swagger.version>
         <postgresql.version>42.2.8</postgresql.version>
         <vaadin.version>14.0.13</vaadin.version>
     </properties>
@@ -108,16 +107,6 @@
                 <groupId>javax.inject</groupId>
                 <artifactId>javax.inject</artifactId>
                 <version>${javax.inject.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox.swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${springfox.swagger.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.postgresql</groupId>
