@@ -24,7 +24,6 @@ public class MainLayout extends Composite<VerticalLayout> implements RouterLayou
     private Div content = new Div();
 
     public MainLayout() {
-        orderIcon.getStyle().set()
         navBar.add(orderIcon, toItems, nav2, nav3, nav4);
         getContent().add(navBar);
         getContent().add(content);
