@@ -14,6 +14,8 @@ public class ItemResult extends Composite<VerticalLayout> {
 
         ItemDetails itemDetails = new ItemDetails(this.item);
 
+        getContent().getElement().getStyle().set("margin-top", "0");
+        getContent().getElement().getStyle().set("margin-bottom", "0");
         getContent().add(itemDetails);
     }
 }

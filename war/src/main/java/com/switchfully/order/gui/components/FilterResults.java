@@ -37,5 +37,7 @@ public class FilterResults extends Composite<HorizontalLayout> {
         filtering.add(filter, searchTextBtn);
 
         getContent().add(filtering);
+        getContent().getElement().getStyle().set("margin-top", "30px");
+        getContent().getElement().getStyle().set("margin-left", "250px");
     }
 }

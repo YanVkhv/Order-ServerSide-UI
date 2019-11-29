@@ -38,6 +38,8 @@ public class ItemDetails extends Composite<VerticalLayout> {
         HorizontalLayout priceAndStock = new HorizontalLayout(price, stock);
 
         VerticalLayout main = new VerticalLayout(name, itemPlaceholder, priceAndStock);
+        getContent().getElement().getStyle().set("margin-top", "0");
+        getContent().getElement().getStyle().set("margin-bottom", "0");
         getContent().add(main);
 
     }

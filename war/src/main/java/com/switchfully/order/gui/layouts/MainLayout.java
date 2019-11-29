@@ -1,5 +1,6 @@
 package com.switchfully.order.gui.layouts;
 
+import com.switchfully.order.gui.views.CreateItemPage;
 import com.switchfully.order.gui.views.HomePage;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasElement;
@@ -16,7 +17,7 @@ import java.util.Objects;
 public class MainLayout extends Composite<VerticalLayout> implements RouterLayout {
     private HorizontalLayout navBar = new HorizontalLayout();
     private RouterLink toItems = new RouterLink("Items", HomePage.class);
-    private RouterLink nav2 = new RouterLink("Nav #2", HomePage.class);
+    private RouterLink nav2 = new RouterLink("Create Item", CreateItemPage.class);
     private RouterLink nav3 = new RouterLink("Nav #3", HomePage.class);
     private RouterLink nav4 = new RouterLink("Nav #4", HomePage.class);
     private Image orderIcon = new Image("icons/order-icon.png", "Order icon");

@@ -24,6 +24,8 @@ public class ItemResultList extends Composite<VerticalLayout> implements DataPro
                 .fetch(new Query<>())
                 .map(ItemResult::new)
                 .forEach(itemResult -> this.getContent().add(itemResult));
+        getContent().getElement().getStyle().set("margin-top", "0");
+        getContent().getElement().getStyle().set("margin-bottom", "0");
     }
 
     @Override
