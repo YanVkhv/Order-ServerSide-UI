@@ -30,7 +30,7 @@ public class FilterResults extends Composite<HorizontalLayout> {
         filter.setPlaceholder("Filter by name...");
         filter.setValueChangeMode(ValueChangeMode.EAGER);
         filter.addValueChangeListener(e -> itemDataProvider.setFilter(
-                ItemOverviewDto::getName, name -> name.toLowerCase().contains(e.getValue().toLowerCase())));
+                ItemOverviewDto::getName, name -> name.toLowerCase().startsWith(e.getValue().toLowerCase())));
 
         searchTextBtn.getElement().setProperty("title", "Search");
 
