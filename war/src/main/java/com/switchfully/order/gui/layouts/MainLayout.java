@@ -20,7 +20,7 @@ public class MainLayout extends Composite<VerticalLayout> implements RouterLayou
     private RouterLink nav3 = new RouterLink("Nav #3", HomePage.class);
     private RouterLink nav4 = new RouterLink("Nav #4", HomePage.class);
     private Image orderIcon = new Image("icons/order-icon.png", "Order icon");
-    private Image orderFooter = new Image("icons/order-footer.png", "Order footer image");
+    private Image orderFooter = new Image("images/order-footer.png", "Order footer image");
     private Div content = new Div();
 
     public MainLayout() {
