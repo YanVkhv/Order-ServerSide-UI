@@ -34,7 +34,6 @@ public class ItemDetails extends Composite<VerticalLayout> {
             stock.add(stockHigh);
         }
 
-
         HorizontalLayout priceAndStock = new HorizontalLayout(price, stock);
 
         VerticalLayout main = new VerticalLayout(name, itemPlaceholder, priceAndStock);

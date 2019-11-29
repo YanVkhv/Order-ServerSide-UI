@@ -29,6 +29,7 @@ public class HomePage extends Composite<VerticalLayout> {
         ItemResultList results = new ItemResultList(itemOverviewDtoListDataProvider);
 
         HorizontalLayout header = new HorizontalLayout(headerTitle, new FilterResults(itemOverviewDtoListDataProvider));
+
         getContent().add(header, results);
     }
 }

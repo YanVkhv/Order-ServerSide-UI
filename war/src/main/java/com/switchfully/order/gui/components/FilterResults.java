@@ -1,16 +1,13 @@
 package com.switchfully.order.gui.components;
 
-import com.switchfully.order.api.items.ItemApplicationService;
 import com.switchfully.order.api.items.ItemOverviewDto;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
@@ -37,7 +34,7 @@ public class FilterResults extends Composite<HorizontalLayout> {
         filtering.add(filter, searchTextBtn);
 
         getContent().add(filtering);
-        getContent().getElement().getStyle().set("margin-top", "30px");
-        getContent().getElement().getStyle().set("margin-left", "250px");
+//        getContent().getElement().getStyle().set("margin-top", "20");
+//        getContent().getElement().getStyle().set("margin-left", "370px");
     }
 }
