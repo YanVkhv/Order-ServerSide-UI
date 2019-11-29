@@ -3,25 +3,31 @@ package com.switchfully.order.gui.components;
 import com.switchfully.order.api.items.ItemOverviewDto;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.provider.DataChangeEvent;
+import com.vaadin.flow.data.provider.DataProviderListener;
+import com.vaadin.flow.data.provider.ListDataProvider;
+import com.vaadin.flow.data.provider.Query;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ItemResultList extends Composite<VerticalLayout> implements DataProviderListener<ItemOverviewDto> {
 
-public class ItemResultList extends Composite<VerticalLayout> {
+    private ListDataProvider<ItemOverviewDto> listDataProvider;
 
-    private List<ItemOverviewDto> items = new ArrayList<>();
-
-    public void setItems(List<ItemOverviewDto> items) {
-        this.items = items;
+    public ItemResultList(ListDataProvider<ItemOverviewDto> listDataProvider) {
+        this.listDataProvider = listDataProvider;
+        this.listDataProvider.addDataProviderListener(this);
         refreshList();
     }
 
     private void refreshList() {
         getContent().removeAll();
-        this.items
-                .stream()
+        this.listDataProvider
+                .fetch(new Query<>())
                 .map(ItemResult::new)
                 .forEach(itemResult -> this.getContent().add(itemResult));
     }
 
+    @Override
+    public void onDataChange(DataChangeEvent<ItemOverviewDto> dataChangeEvent) {
+        refreshList();
+    }
 }
