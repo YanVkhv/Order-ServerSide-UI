@@ -16,6 +16,7 @@ import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.value.ValueChangeMode;
 
 public class CreateItemForm extends Composite<FormLayout> {
 
@@ -30,6 +31,7 @@ public class CreateItemForm extends Composite<FormLayout> {
     private Binder<ItemDto> binder = new Binder<>(ItemDto.class);
     private Button cancel = new Button("Cancel");
     private Button create = new Button("Create");
+    private CharCounter counter = new CharCounter(0);
 
     ItemDto itemDto = new ItemDto();
 
@@ -61,10 +63,17 @@ public class CreateItemForm extends Composite<FormLayout> {
         amountOfStock.setLabel("Amount in Stock");
         priceAndStock.add(price, amountOfStock);
         buttons.add(create, cancel);
-        completeForm.add(name, description, new CharCounter(), priceAndStock, buttons);
+
+        completeForm.add(name, description, counter, priceAndStock, buttons);
 
         create.addClickListener(e -> createItem());
         cancel.addClickListener(e -> UI.getCurrent().navigate(HomePage.class));
+
+        description.setValueChangeMode(ValueChangeMode.EAGER);
+        description.addValueChangeListener(e -> {
+            completeForm.remove(completeForm.getComponentAt(2));
+            completeForm.addComponentAtIndex(2, new CharCounter(description.getValue().length()));
+        });
 
         create.setWidth("660px");
         cancel.setWidth("120px");
@@ -82,6 +91,7 @@ public class CreateItemForm extends Composite<FormLayout> {
     private void createItem() {
         itemApplicationService.createItem(binder.getBean());
         Notification.show(String.format("Item %s has been %s.", binder.getBean().getName(), " created"));
+        UI.getCurrent().navigate(HomePage.class);
     }
 
 }
