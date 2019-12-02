@@ -2,7 +2,7 @@ package com.switchfully.order.gui.views;
 
 import com.switchfully.order.api.items.ItemApplicationService;
 import com.switchfully.order.api.items.ItemDto;
-import com.switchfully.order.gui.components.CreateItemForm;
+import com.switchfully.order.gui.components.ViewItemForm;
 import com.switchfully.order.gui.layouts.MainLayout;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.html.H2;
@@ -26,7 +26,7 @@ public class DetailsPage extends Composite<VerticalLayout> implements HasUrlPara
 
     public void generatePage(ItemDto item) {
         header.setText("Item: " + item.getId());
-        getContent().add(header, new CreateItemForm(itemApplicationService, item));
+        getContent().add(header, new ViewItemForm(itemApplicationService, item));
     }
 
     @Override
