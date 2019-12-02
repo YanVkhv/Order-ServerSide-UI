@@ -4,6 +4,7 @@ import com.switchfully.order.api.items.ItemApplicationService;
 import com.switchfully.order.api.items.ItemDto;
 import com.switchfully.order.gui.components.converters.DoubleToIntegerConverter;
 import com.switchfully.order.gui.components.converters.FloatToIntegerConverter;
+import com.switchfully.order.gui.views.DetailsPage;
 import com.switchfully.order.gui.views.HomePage;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
@@ -43,12 +44,13 @@ public class UpdateItemForm extends Composite<FormLayout> {
                 .bind(ItemDto::getName, ItemDto::withName);
 
         binder.forField(description)
+                .withValidator(description -> description.length() <= 255, "Description length exceeded...")
                 .bind(ItemDto::getDescription, ItemDto::withDescription);
 
         binder.forField(price)
-                .withValidator(aDouble -> aDouble >= 0, "Price cannot be lower than 0.0 €")
                 .asRequired()
                 .withConverter(new FloatToIntegerConverter())
+                .withValidator(aDouble -> aDouble > 0.1, "Price cannot be lower than 0.1 €")
                 .bind(ItemDto::getPrice, ItemDto::withPrice);
 
         binder.forField(amountOfStock)
@@ -79,6 +81,9 @@ public class UpdateItemForm extends Composite<FormLayout> {
         cancel.setWidth("120px");
         update.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         update.setIcon(VaadinIcon.CLIPBOARD_CHECK.create());
+        cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
+        price.setMin(0.1);
         description.setMaxLength(255);
         description.setPlaceholder("Max. length: 255 characters");
         description.setHeight("200px");
@@ -93,7 +98,8 @@ public class UpdateItemForm extends Composite<FormLayout> {
     private void updateItem(String itemId) {
         itemApplicationService.updateItem(itemId, binder.getBean());
         Notification.show(String.format("Item %s has been %s.", binder.getBean().getName(), " updated"));
-        UI.getCurrent().navigate(HomePage.class);
+        this.getContent().removeAll();
+        UI.getCurrent().navigate(DetailsPage.class, itemId);
     }
 
 }

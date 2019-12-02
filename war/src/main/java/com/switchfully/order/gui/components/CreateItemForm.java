@@ -8,7 +8,9 @@ import com.switchfully.order.gui.views.HomePage;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -41,12 +43,13 @@ public class CreateItemForm extends Composite<FormLayout> {
                 .bind(ItemDto::getName, ItemDto::withName);
 
         binder.forField(description)
+                .withValidator(description -> description.length() <= 255, "Description length exceeded...")
                 .bind(ItemDto::getDescription, ItemDto::withDescription);
 
         binder.forField(price)
-                .withValidator(aDouble -> aDouble >= 0, "Price cannot be lower than 0.0 €")
                 .asRequired()
                 .withConverter(new FloatToIntegerConverter())
+                .withValidator(aDouble -> aDouble > 0.1, "Price cannot be lower than 0.1 €")
                 .bind(ItemDto::getPrice, ItemDto::withPrice);
 
         binder.forField(amountOfStock)
@@ -58,6 +61,7 @@ public class CreateItemForm extends Composite<FormLayout> {
         name.setLabel("Name");
         description.setLabel("Description");
         price.setLabel("Price");
+        price.setPlaceholder("0");
         amountOfStock.setLabel("Amount in Stock");
         priceAndStock.add(price, amountOfStock);
         buttons.add(create, cancel);
@@ -75,7 +79,11 @@ public class CreateItemForm extends Composite<FormLayout> {
 
         create.setWidth("660px");
         cancel.setWidth("120px");
-        description.setMaxLength(255);
+        create.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        create.setIcon(VaadinIcon.FILE_ADD.create());
+        cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
+        price.setMin(0.1);
         description.setPlaceholder("Max. length: 255 characters");
         description.setHeight("200px");
         description.setWidth("790px");

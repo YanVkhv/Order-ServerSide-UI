@@ -10,6 +10,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -32,27 +33,21 @@ public class ViewItemForm extends Composite<FormLayout> {
     private Binder<ItemDto> binder = new Binder<>(ItemDto.class);
     private Button cancel = new Button("Cancel");
     private Button edit = new Button("Edit");
-    private CharCounter counter = new CharCounter(0);
 
     public ViewItemForm(ItemApplicationService itemApplicationService, ItemDto itemDto) {
         this.itemApplicationService = itemApplicationService;
 
         binder.forField(name)
-                .asRequired()
                 .bind(ItemDto::getName, null);
 
         binder.forField(description)
                 .bind(ItemDto::getDescription, null);
 
         binder.forField(price)
-                .withValidator(aDouble -> aDouble >= 0, "Price cannot be lower than 0.0 €")
-                .asRequired()
                 .withConverter(new FloatToIntegerConverter())
                 .bind(ItemDto::getPrice, null);
 
         binder.forField(amountOfStock)
-                .withValidator(aDouble -> aDouble >= 0, "Stock cannot be lower than 0")
-                .asRequired()
                 .withConverter(new DoubleToIntegerConverter())
                 .bind(ItemDto::getAmountOfStock, null);
 
@@ -63,7 +58,7 @@ public class ViewItemForm extends Composite<FormLayout> {
         priceAndStock.add(price, amountOfStock);
         buttons.add(edit, cancel);
 
-        completeForm.add(name, description, counter, priceAndStock, buttons);
+        completeForm.add(name, description, priceAndStock, buttons);
 
         edit.addClickListener(e -> {
             getContent().removeAll();
@@ -71,16 +66,12 @@ public class ViewItemForm extends Composite<FormLayout> {
         });
         cancel.addClickListener(e -> UI.getCurrent().navigate(HomePage.class));
 
-        description.setValueChangeMode(ValueChangeMode.EAGER);
-        description.addValueChangeListener(e -> {
-            completeForm.remove(completeForm.getComponentAt(2));
-            completeForm.addComponentAtIndex(2, new CharCounter(description.getValue().length()));
-        });
-
         edit.setWidth("660px");
         cancel.setWidth("120px");
-        description.setMaxLength(255);
-        description.setPlaceholder("Max. length: 255 characters");
+        edit.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+        edit.setIcon(VaadinIcon.EDIT.create());
+        cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
         description.setHeight("200px");
         description.setWidth("790px");
         name.setWidth("790px");
