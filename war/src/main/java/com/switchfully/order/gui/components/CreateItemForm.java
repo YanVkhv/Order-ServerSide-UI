@@ -33,9 +33,7 @@ public class CreateItemForm extends Composite<FormLayout> {
     private Button create = new Button("Create");
     private CharCounter counter = new CharCounter(0);
 
-    ItemDto itemDto = new ItemDto();
-
-    public CreateItemForm(ItemApplicationService itemApplicationService) {
+    public CreateItemForm(ItemApplicationService itemApplicationService, ItemDto itemDto) {
         this.itemApplicationService = itemApplicationService;
 
         binder.forField(name)

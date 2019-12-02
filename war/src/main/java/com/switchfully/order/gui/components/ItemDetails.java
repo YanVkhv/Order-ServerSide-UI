@@ -1,6 +1,7 @@
 package com.switchfully.order.gui.components;
 
 import com.switchfully.order.api.items.ItemOverviewDto;
+import com.switchfully.order.gui.views.DetailsPage;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Image;
@@ -37,6 +38,7 @@ public class ItemDetails extends Composite<VerticalLayout> {
         HorizontalLayout priceAndStock = new HorizontalLayout(price, stock);
 
         VerticalLayout main = new VerticalLayout(name, itemPlaceholder, priceAndStock);
+        main.addClickListener(e -> main.getUI().ifPresent(ui -> ui.navigate(DetailsPage.class, item.getId())));
         getContent().getElement().getStyle().set("margin-top", "0");
         getContent().getElement().getStyle().set("margin-bottom", "0");
         getContent().add(main);

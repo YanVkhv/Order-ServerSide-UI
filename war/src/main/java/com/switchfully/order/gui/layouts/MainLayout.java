@@ -29,6 +29,7 @@ public class MainLayout extends Composite<VerticalLayout> implements RouterLayou
 
     public MainLayout() {
         homepage.addClickListener(e -> UI.getCurrent().navigate(HomePage.class));
+        orderIcon.addClickListener(e -> UI.getCurrent().navigate(HomePage.class));
         create.addClickListener(e -> UI.getCurrent().navigate(CreateItemPage.class));
         customers.addClickListener(e -> UI.getCurrent().navigate(CustomersPage.class));
         nav4.addClickListener(e -> UI.getCurrent().navigate(HomePage.class));

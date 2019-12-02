@@ -1,6 +1,7 @@
 package com.switchfully.order.gui.views;
 
 import com.switchfully.order.api.items.ItemApplicationService;
+import com.switchfully.order.api.items.ItemDto;
 import com.switchfully.order.gui.components.CreateItemForm;
 import com.switchfully.order.gui.layouts.MainLayout;
 import com.vaadin.flow.component.Composite;
@@ -20,6 +21,6 @@ public class CreateItemPage extends Composite<VerticalLayout> {
     public CreateItemPage(ItemApplicationService itemApplicationService) {
         this.itemApplicationService = itemApplicationService;
 
-        getContent().add(header, new CreateItemForm(itemApplicationService));
+        getContent().add(header, new CreateItemForm(itemApplicationService, new ItemDto()));
     }
 }
