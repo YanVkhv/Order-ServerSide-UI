@@ -5,6 +5,7 @@ import com.switchfully.order.api.items.ItemDto;
 import com.switchfully.order.gui.components.converters.DoubleToIntegerConverter;
 import com.switchfully.order.gui.components.converters.FloatToIntegerConverter;
 import com.switchfully.order.gui.views.ItemsPage;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -66,7 +67,6 @@ public class CreateItemForm extends Composite<FormLayout> {
         priceAndStock.add(price, amountOfStock);
         buttons.add(create, cancel);
 
-        completeForm.add(name, description, counter, priceAndStock, buttons);
 
         create.addClickListener(e -> createItem());
         cancel.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
@@ -77,20 +77,25 @@ public class CreateItemForm extends Composite<FormLayout> {
             completeForm.addComponentAtIndex(2, new CharCounter(description.getValue().length()));
         });
 
-//        create.setWidth("660px");
-//        cancel.setWidth("120px");
+        name.setWidthFull();
+        description.setWidthFull();
+        create.setWidth("75%");
+        cancel.setWidth("25%");
+        buttons.setWidthFull();
+        price.setWidth("auto");
+        amountOfStock.setWidth("auto");
+        priceAndStock.setWidthFull();
         create.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         create.setIcon(VaadinIcon.FILE_ADD.create());
         cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
         price.setMin(0.1);
         description.setPlaceholder("Max. length: 255 characters");
-//        description.setHeight("200px");
-//        description.setWidth("790px");
-//        name.setWidth("790px");
 
         binder.setBean(itemDto);
 
+        completeForm.add(name, description, counter, priceAndStock, buttons);
+        completeForm.setSizeFull();
         getContent().add(completeForm);
     }
 

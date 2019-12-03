@@ -42,6 +42,7 @@ public class MainLayout extends Composite<VerticalLayout> implements RouterLayou
         orderIcon.setWidth("255px");
         navBar.add(homepage, create, customers, nav4);
         header.add(orderIcon, navBar);
+        content.setSizeFull();
 
         getContent().add(header);
         getContent().add(content);

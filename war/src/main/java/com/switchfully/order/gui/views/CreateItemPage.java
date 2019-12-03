@@ -6,7 +6,6 @@ import com.switchfully.order.gui.components.CreateItemForm;
 import com.switchfully.order.gui.layouts.MainLayout;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -22,6 +21,8 @@ public class CreateItemPage extends Composite<VerticalLayout> {
     public CreateItemPage(ItemApplicationService itemApplicationService) {
         this.itemApplicationService = itemApplicationService;
 
+        header.setSizeFull();
+        getContent().setSizeFull();
         getContent().add(header, new CreateItemForm(itemApplicationService, new ItemDto()));
     }
 }
