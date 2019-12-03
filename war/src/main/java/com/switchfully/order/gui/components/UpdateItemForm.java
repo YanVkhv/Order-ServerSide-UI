@@ -3,7 +3,7 @@ package com.switchfully.order.gui.components;
 import com.switchfully.order.api.items.ItemApplicationService;
 import com.switchfully.order.api.items.ItemDto;
 import com.switchfully.order.gui.components.converters.DoubleToIntegerConverter;
-import com.switchfully.order.gui.components.converters.FloatToIntegerConverter;
+import com.switchfully.order.gui.components.converters.FloatToDoubleConverter;
 import com.switchfully.order.gui.views.DetailsPage;
 import com.switchfully.order.gui.views.ItemsPage;
 import com.vaadin.flow.component.Composite;
@@ -49,12 +49,12 @@ public class UpdateItemForm extends Composite<VerticalLayout> {
 
         binder.forField(price)
                 .asRequired()
-                .withConverter(new FloatToIntegerConverter())
-                .withValidator(aDouble -> aDouble > 0.1, "Price cannot be lower than 0.1 €")
+                .withValidator(price -> price >= 0.01, "Price cannot be lower than 0.01 €")
+                .withConverter(new FloatToDoubleConverter())
                 .bind(ItemDto::getPrice, ItemDto::withPrice);
 
         binder.forField(amountOfStock)
-                .withValidator(aDouble -> aDouble >= 0, "Stock cannot be lower than 0")
+                .withValidator(stock -> stock >= 0, "Stock cannot be lower than 0")
                 .asRequired()
                 .withConverter(new DoubleToIntegerConverter())
                 .bind(ItemDto::getAmountOfStock, ItemDto::withAmountOfStock);
@@ -83,7 +83,6 @@ public class UpdateItemForm extends Composite<VerticalLayout> {
         update.setIcon(VaadinIcon.CLIPBOARD_CHECK.create());
         cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
-        price.setMin(0.1);
         description.setPlaceholder("Max. length: " + CharCounter.MAX_ALLOWED_CHARACTERS + " characters");
 
         binder.setBean(itemDto);

@@ -4,7 +4,7 @@ import com.vaadin.flow.data.binder.Result;
 import com.vaadin.flow.data.binder.ValueContext;
 import com.vaadin.flow.data.converter.Converter;
 
-public class FloatToIntegerConverter implements Converter<Double, Float> {
+public class FloatToDoubleConverter implements Converter<Double, Float> {
 
     @Override
     public Result<Float> convertToModel(Double aDouble, ValueContext valueContext) {
@@ -13,6 +13,6 @@ public class FloatToIntegerConverter implements Converter<Double, Float> {
 
     @Override
     public Double convertToPresentation(Float aFloat, ValueContext valueContext) {
-        return aFloat.doubleValue();
+        return Double.valueOf(Float.valueOf(aFloat).toString()).doubleValue();
     }
 }

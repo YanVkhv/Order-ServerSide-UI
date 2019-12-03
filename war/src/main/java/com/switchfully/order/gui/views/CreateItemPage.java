@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route;
 
 import javax.inject.Inject;
 
-@Route(value = "create", layout = MainLayout.class)
+@Route(value = "create_item", layout = MainLayout.class)
 public class CreateItemPage extends Composite<VerticalLayout> {
 
     private ItemApplicationService itemApplicationService;

@@ -3,7 +3,7 @@ package com.switchfully.order.gui.components;
 import com.switchfully.order.api.items.ItemApplicationService;
 import com.switchfully.order.api.items.ItemDto;
 import com.switchfully.order.gui.components.converters.DoubleToIntegerConverter;
-import com.switchfully.order.gui.components.converters.FloatToIntegerConverter;
+import com.switchfully.order.gui.components.converters.FloatToDoubleConverter;
 import com.switchfully.order.gui.views.ItemsPage;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
@@ -41,7 +41,7 @@ public class ViewItemForm extends Composite<VerticalLayout> {
                 .bind(ItemDto::getDescription, null);
 
         binder.forField(price)
-                .withConverter(new FloatToIntegerConverter())
+                .withConverter(new FloatToDoubleConverter())
                 .bind(ItemDto::getPrice, null);
 
         binder.forField(amountOfStock)
