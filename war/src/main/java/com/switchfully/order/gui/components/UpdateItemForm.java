@@ -10,7 +10,6 @@ import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -23,18 +22,18 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 
 public class UpdateItemForm extends Composite<VerticalLayout> {
 
-    private ItemApplicationService itemApplicationService;
-    private TextField name = new TextField();
-    private TextArea description = new TextArea();
-    private NumberField price = new NumberField();
-    private NumberField amountOfStock = new NumberField();
-    private HorizontalLayout priceAndStock = new HorizontalLayout();
-    private HorizontalLayout buttons = new HorizontalLayout();
-    private VerticalLayout completeForm = new VerticalLayout();
-    private Binder<ItemDto> binder = new Binder<>(ItemDto.class);
-    private Button cancel = new Button("Cancel");
-    private Button update = new Button("Update");
-    private CharCounter counter = new CharCounter(0);
+    private final ItemApplicationService itemApplicationService;
+    private final TextField name = new TextField();
+    private final TextArea description = new TextArea();
+    private final NumberField price = new NumberField();
+    private final NumberField amountOfStock = new NumberField();
+    private final HorizontalLayout priceAndStock = new HorizontalLayout();
+    private final HorizontalLayout buttons = new HorizontalLayout();
+    private final VerticalLayout completeForm = new VerticalLayout();
+    private final Binder<ItemDto> binder = new Binder<>(ItemDto.class);
+    private final Button cancel = new Button("Cancel");
+    private final Button update = new Button("Update");
+    private final CharCounter counter = new CharCounter(0);
 
     public UpdateItemForm(ItemApplicationService itemApplicationService, ItemDto itemDto) {
         this.itemApplicationService = itemApplicationService;
@@ -44,7 +43,8 @@ public class UpdateItemForm extends Composite<VerticalLayout> {
                 .bind(ItemDto::getName, ItemDto::withName);
 
         binder.forField(description)
-                .withValidator(description -> description.length() <= 255, "Description length exceeded...")
+                .asRequired()
+                .withValidator(description -> description.length() <= CharCounter.MAX_ALLOWED_CHARACTERS, "Description length exceeded...")
                 .bind(ItemDto::getDescription, ItemDto::withDescription);
 
         binder.forField(price)
@@ -71,11 +71,7 @@ public class UpdateItemForm extends Composite<VerticalLayout> {
         update.addClickListener(e -> updateItem(itemDto.getId()));
         cancel.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
 
-        description.setValueChangeMode(ValueChangeMode.EAGER);
-        description.addValueChangeListener(e -> {
-            completeForm.remove(completeForm.getComponentAt(2));
-            completeForm.addComponentAtIndex(2, new CharCounter(description.getValue().length()));
-        });
+        generateCharCalculator();
 
         name.setWidthFull();
         description.setWidthFull();
@@ -88,11 +84,19 @@ public class UpdateItemForm extends Composite<VerticalLayout> {
         cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
         price.setMin(0.1);
-        description.setPlaceholder("Max. length: 255 characters");
+        description.setPlaceholder("Max. length: " + CharCounter.MAX_ALLOWED_CHARACTERS + " characters");
 
         binder.setBean(itemDto);
 
         getContent().add(completeForm);
+    }
+
+    private void generateCharCalculator() {
+        description.setValueChangeMode(ValueChangeMode.EAGER);
+        description.addValueChangeListener(e -> {
+            completeForm.remove(completeForm.getComponentAt(2));
+            completeForm.addComponentAtIndex(2, new CharCounter(description.getValue().length()));
+        });
     }
 
     private void updateItem(String itemId) {

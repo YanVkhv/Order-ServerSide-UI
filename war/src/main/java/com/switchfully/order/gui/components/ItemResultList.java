@@ -15,7 +15,9 @@ public class ItemResultList extends Composite<FlexLayout> implements DataProvide
     public ItemResultList(ListDataProvider<ItemOverviewDto> listDataProvider) {
         this.listDataProvider = listDataProvider;
         this.listDataProvider.addDataProviderListener(this);
+
         refreshList();
+
         getContent().setWrapMode(FlexLayout.WrapMode.WRAP);
         getContent().setSizeFull();
     }

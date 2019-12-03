@@ -6,7 +6,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
 public class ItemResult extends Composite<VerticalLayout> {
 
-    private ItemOverviewDto item;
+    private final ItemOverviewDto item;
 
     public ItemResult(ItemOverviewDto item) {
         this.item = item;

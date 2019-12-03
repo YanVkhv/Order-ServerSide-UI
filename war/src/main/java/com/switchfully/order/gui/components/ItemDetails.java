@@ -26,6 +26,16 @@ public class ItemDetails extends Composite<FlexLayout> {
         Span price = new Span("Price: € " + item.getPrice());
         Span stock = new Span();
 
+        generateStockIcon(item, stockLow, stockMedium, stockHigh, stock);
+
+        HorizontalLayout priceAndStock = new HorizontalLayout(price, stock);
+
+        VerticalLayout main = new VerticalLayout(name, itemPlaceholder, priceAndStock);
+        main.addClickListener(e -> main.getUI().ifPresent(ui -> ui.navigate(DetailsPage.class, item.getId())));
+        getContent().add(main);
+    }
+
+    private void generateStockIcon(ItemOverviewDto item, Image stockLow, Image stockMedium, Image stockHigh, Span stock) {
         if (item.getStockUrgency().equals("STOCK_LOW")) {
             stock.add("LOW  ");
             stock.add(stockLow);
@@ -36,11 +46,5 @@ public class ItemDetails extends Composite<FlexLayout> {
             stock.add("HIGH  ");
             stock.add(stockHigh);
         }
-
-        HorizontalLayout priceAndStock = new HorizontalLayout(price, stock);
-
-        VerticalLayout main = new VerticalLayout(name, itemPlaceholder, priceAndStock);
-        main.addClickListener(e -> main.getUI().ifPresent(ui -> ui.navigate(DetailsPage.class, item.getId())));
-        getContent().add(main);
     }
 }

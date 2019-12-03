@@ -9,7 +9,6 @@ import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -20,17 +19,17 @@ import com.vaadin.flow.data.binder.Binder;
 
 public class ViewItemForm extends Composite<VerticalLayout> {
 
-    private ItemApplicationService itemApplicationService;
-    private TextField name = new TextField();
-    private TextArea description = new TextArea();
-    private NumberField price = new NumberField();
-    private NumberField amountOfStock = new NumberField();
-    private HorizontalLayout priceAndStock = new HorizontalLayout();
-    private HorizontalLayout buttons = new HorizontalLayout();
-    private VerticalLayout completeForm = new VerticalLayout();
-    private Binder<ItemDto> binder = new Binder<>(ItemDto.class);
-    private Button cancel = new Button("Cancel");
-    private Button edit = new Button("Edit");
+    private final ItemApplicationService itemApplicationService;
+    private final TextField name = new TextField();
+    private final TextArea description = new TextArea();
+    private final NumberField price = new NumberField();
+    private final NumberField amountOfStock = new NumberField();
+    private final HorizontalLayout priceAndStock = new HorizontalLayout();
+    private final HorizontalLayout buttons = new HorizontalLayout();
+    private final VerticalLayout completeForm = new VerticalLayout();
+    private final Binder<ItemDto> binder = new Binder<>(ItemDto.class);
+    private final Button cancel = new Button("Cancel");
+    private final Button edit = new Button("Edit");
 
     public ViewItemForm(ItemApplicationService itemApplicationService, ItemDto itemDto) {
         this.itemApplicationService = itemApplicationService;
@@ -75,7 +74,6 @@ public class ViewItemForm extends Composite<VerticalLayout> {
         cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
         price.setMin(0.1);
-        description.setPlaceholder("Max. length: 255 characters");
 
         binder.setBean(itemDto);
 
