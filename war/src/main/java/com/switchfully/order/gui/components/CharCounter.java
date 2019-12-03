@@ -6,7 +6,7 @@ import com.vaadin.flow.component.html.Span;
 public class CharCounter extends Composite<Span> {
 
     private static final int MAX_ALLOWED_CHARACTERS = 255;
-    private String charCounter;
+    private final String charCounter;
 
     public CharCounter(int amountOfCharacters) {
 

@@ -19,7 +19,7 @@ public class FilterResults extends Composite<HorizontalLayout> {
     private final TextField filter = new TextField();
     private final Button searchTextBtn = new Button(new Icon(VaadinIcon.SEARCH));
     private final FlexLayout filtering = new FlexLayout();
-    private ListDataProvider<ItemOverviewDto> itemDataProvider;
+    private final ListDataProvider<ItemOverviewDto> itemDataProvider;
 
     @Inject
     public FilterResults(ListDataProvider<ItemOverviewDto> itemDataProvider) {
