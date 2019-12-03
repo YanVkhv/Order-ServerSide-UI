@@ -6,6 +6,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -17,7 +18,7 @@ public class FilterResults extends Composite<HorizontalLayout> {
 
     private final TextField filter = new TextField();
     private final Button searchTextBtn = new Button(new Icon(VaadinIcon.SEARCH));
-    private final HorizontalLayout filtering = new HorizontalLayout();
+    private final FlexLayout filtering = new FlexLayout();
     private ListDataProvider<ItemOverviewDto> itemDataProvider;
 
     @Inject
@@ -32,7 +33,7 @@ public class FilterResults extends Composite<HorizontalLayout> {
         searchTextBtn.getElement().setProperty("title", "Search");
 
         filtering.add(filter, searchTextBtn);
-
+        filtering.getElement().getStyle().set("margin-top", "10px");
         getContent().add(filtering);
     }
 }

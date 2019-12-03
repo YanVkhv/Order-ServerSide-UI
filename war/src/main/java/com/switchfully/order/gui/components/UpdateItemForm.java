@@ -21,7 +21,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
-public class UpdateItemForm extends Composite<FormLayout> {
+public class UpdateItemForm extends Composite<VerticalLayout> {
 
     private ItemApplicationService itemApplicationService;
     private TextField name = new TextField();
@@ -77,16 +77,18 @@ public class UpdateItemForm extends Composite<FormLayout> {
             completeForm.addComponentAtIndex(2, new CharCounter(description.getValue().length()));
         });
 
-//        update.setWidth("660px");
-//        cancel.setWidth("120px");
+        name.setWidthFull();
+        description.setWidthFull();
+        update.setWidthFull();
+        cancel.setWidth("200px");
+        buttons.setWidthFull();
+        priceAndStock.setWidthFull();
         update.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         update.setIcon(VaadinIcon.CLIPBOARD_CHECK.create());
         cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
+        price.setMin(0.1);
         description.setPlaceholder("Max. length: 255 characters");
-//        description.setHeight("200px");
-//        description.setWidth("790px");
-//        name.setWidth("790px");
 
         binder.setBean(itemDto);
 

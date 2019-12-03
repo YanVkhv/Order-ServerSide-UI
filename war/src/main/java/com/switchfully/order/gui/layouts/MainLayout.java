@@ -9,7 +9,7 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLayout;
@@ -17,8 +17,10 @@ import com.vaadin.flow.router.RouterLayout;
 import java.util.Objects;
 
 public class MainLayout extends Composite<VerticalLayout> implements RouterLayout {
-    private final HorizontalLayout navBar = new HorizontalLayout();
+    private final FlexLayout navBar = new FlexLayout();
     private final HorizontalLayout header = new HorizontalLayout();
+    private final FlexLayout navTop = new FlexLayout();
+    private final FlexLayout navBottom = new FlexLayout();
     private final Button homepage = new Button("Items");
     private final Button create = new Button("Create Item");
     private final Button customers = new Button("Customers");
@@ -28,19 +30,22 @@ public class MainLayout extends Composite<VerticalLayout> implements RouterLayou
     private final Div content = new Div();
 
     public MainLayout() {
-        homepage.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
         orderIcon.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
+        homepage.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
         create.addClickListener(e -> UI.getCurrent().navigate(CreateItemPage.class));
         customers.addClickListener(e -> UI.getCurrent().navigate(CustomersPage.class));
         nav4.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
 
         navBar.getStyle().set("margin-left", "auto");
+        navBar.setWrapMode(FlexLayout.WrapMode.WRAP);
         header.setSizeFull();
         orderFooter.setSizeFull();
         orderIcon.setSizeFull();
         orderIcon.setHeight("61px");
         orderIcon.setWidth("255px");
-        navBar.add(homepage, create, customers, nav4);
+        navTop.add(homepage, create);
+        navBottom.add(customers, nav4);
+        navBar.add(navTop, navBottom);
         header.add(orderIcon, navBar);
         content.setSizeFull();
 

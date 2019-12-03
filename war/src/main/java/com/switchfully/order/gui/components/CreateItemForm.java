@@ -5,12 +5,10 @@ import com.switchfully.order.api.items.ItemDto;
 import com.switchfully.order.gui.components.converters.DoubleToIntegerConverter;
 import com.switchfully.order.gui.components.converters.FloatToIntegerConverter;
 import com.switchfully.order.gui.views.ItemsPage;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -21,7 +19,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.value.ValueChangeMode;
 
-public class CreateItemForm extends Composite<FormLayout> {
+public class CreateItemForm extends Composite<VerticalLayout> {
 
     private ItemApplicationService itemApplicationService;
     private TextField name = new TextField();
@@ -79,11 +77,9 @@ public class CreateItemForm extends Composite<FormLayout> {
 
         name.setWidthFull();
         description.setWidthFull();
-        create.setWidth("75%");
-        cancel.setWidth("25%");
+        create.setWidthFull();
+        cancel.setWidth("200px");
         buttons.setWidthFull();
-        price.setWidth("auto");
-        amountOfStock.setWidth("auto");
         priceAndStock.setWidthFull();
         create.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         create.setIcon(VaadinIcon.FILE_ADD.create());
@@ -95,7 +91,7 @@ public class CreateItemForm extends Composite<FormLayout> {
         binder.setBean(itemDto);
 
         completeForm.add(name, description, counter, priceAndStock, buttons);
-        completeForm.setSizeFull();
+        completeForm.setWidthFull();
         getContent().add(completeForm);
     }
 

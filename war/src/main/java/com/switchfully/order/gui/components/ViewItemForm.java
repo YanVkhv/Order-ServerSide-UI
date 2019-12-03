@@ -18,7 +18,7 @@ import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 
-public class ViewItemForm extends Composite<FormLayout> {
+public class ViewItemForm extends Composite<VerticalLayout> {
 
     private ItemApplicationService itemApplicationService;
     private TextField name = new TextField();
@@ -64,15 +64,18 @@ public class ViewItemForm extends Composite<FormLayout> {
         });
         cancel.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
 
-        edit.setWidth("660px");
-        cancel.setWidth("120px");
+        name.setWidthFull();
+        description.setWidthFull();
+        edit.setWidthFull();
+        cancel.setWidth("200px");
+        buttons.setWidthFull();
+        priceAndStock.setWidthFull();
         edit.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         edit.setIcon(VaadinIcon.EDIT.create());
         cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
-        description.setHeight("200px");
-        description.setWidth("790px");
-        name.setWidth("790px");
+        price.setMin(0.1);
+        description.setPlaceholder("Max. length: 255 characters");
 
         binder.setBean(itemDto);
 
