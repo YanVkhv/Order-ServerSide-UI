@@ -10,12 +10,11 @@ public class ItemResult extends Composite<VerticalLayout> {
 
     public ItemResult(ItemOverviewDto item) {
         this.item = item;
-        VerticalLayout main = new VerticalLayout();
 
         ItemDetails itemDetails = new ItemDetails(this.item);
 
-        getContent().getElement().getStyle().set("margin-top", "0");
-        getContent().getElement().getStyle().set("margin-bottom", "0");
+        getContent().setWidth("268px");
+        getContent().setPadding(false);
         getContent().add(itemDetails);
     }
 }

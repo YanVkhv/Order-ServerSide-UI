@@ -4,21 +4,19 @@ import com.switchfully.order.api.items.ItemApplicationService;
 import com.switchfully.order.api.items.ItemDto;
 import com.switchfully.order.gui.components.converters.DoubleToIntegerConverter;
 import com.switchfully.order.gui.components.converters.FloatToIntegerConverter;
-import com.switchfully.order.gui.views.HomePage;
+import com.switchfully.order.gui.views.ItemsPage;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
-import com.vaadin.flow.data.value.ValueChangeMode;
 
 public class ViewItemForm extends Composite<FormLayout> {
 
@@ -64,7 +62,7 @@ public class ViewItemForm extends Composite<FormLayout> {
             getContent().removeAll();
             getContent().add(new UpdateItemForm(itemApplicationService, itemDto));
         });
-        cancel.addClickListener(e -> UI.getCurrent().navigate(HomePage.class));
+        cancel.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
 
         edit.setWidth("660px");
         cancel.setWidth("120px");

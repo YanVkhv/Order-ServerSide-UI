@@ -4,7 +4,7 @@ import com.switchfully.order.api.items.ItemApplicationService;
 import com.switchfully.order.api.items.ItemDto;
 import com.switchfully.order.gui.components.converters.DoubleToIntegerConverter;
 import com.switchfully.order.gui.components.converters.FloatToIntegerConverter;
-import com.switchfully.order.gui.views.HomePage;
+import com.switchfully.order.gui.views.ItemsPage;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -69,7 +69,7 @@ public class CreateItemForm extends Composite<FormLayout> {
         completeForm.add(name, description, counter, priceAndStock, buttons);
 
         create.addClickListener(e -> createItem());
-        cancel.addClickListener(e -> UI.getCurrent().navigate(HomePage.class));
+        cancel.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
 
         description.setValueChangeMode(ValueChangeMode.EAGER);
         description.addValueChangeListener(e -> {
@@ -77,17 +77,17 @@ public class CreateItemForm extends Composite<FormLayout> {
             completeForm.addComponentAtIndex(2, new CharCounter(description.getValue().length()));
         });
 
-        create.setWidth("660px");
-        cancel.setWidth("120px");
+//        create.setWidth("660px");
+//        cancel.setWidth("120px");
         create.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         create.setIcon(VaadinIcon.FILE_ADD.create());
         cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
         price.setMin(0.1);
         description.setPlaceholder("Max. length: 255 characters");
-        description.setHeight("200px");
-        description.setWidth("790px");
-        name.setWidth("790px");
+//        description.setHeight("200px");
+//        description.setWidth("790px");
+//        name.setWidth("790px");
 
         binder.setBean(itemDto);
 
@@ -97,7 +97,7 @@ public class CreateItemForm extends Composite<FormLayout> {
     private void createItem() {
         itemApplicationService.createItem(binder.getBean());
         Notification.show(String.format("Item %s has been %s.", binder.getBean().getName(), " created"));
-        UI.getCurrent().navigate(HomePage.class);
+        UI.getCurrent().navigate(ItemsPage.class);
     }
 
 }

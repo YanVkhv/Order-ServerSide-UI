@@ -7,6 +7,7 @@ import com.switchfully.order.gui.components.ItemResultList;
 import com.switchfully.order.gui.layouts.MainLayout;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -14,14 +15,14 @@ import com.vaadin.flow.router.Route;
 
 import javax.inject.Inject;
 
-@Route(value = "homepage", layout = MainLayout.class)
-public class HomePage extends Composite<VerticalLayout> {
+@Route(value = "items", layout = MainLayout.class)
+public class ItemsPage extends Composite<VerticalLayout> {
 
     private ItemApplicationService itemApplicationService;
     private final H2 headerTitle = new H2("Items");
 
     @Inject
-    public HomePage(ItemApplicationService itemApplicationService) {
+    public ItemsPage(ItemApplicationService itemApplicationService) {
         this.itemApplicationService = itemApplicationService;
 
         ListDataProvider<ItemOverviewDto> itemOverviewDtoListDataProvider = new ListDataProvider<>(itemApplicationService.getAllItems(null));
