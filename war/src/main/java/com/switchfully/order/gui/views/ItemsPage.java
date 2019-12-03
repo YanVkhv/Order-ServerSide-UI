@@ -31,6 +31,11 @@ public class ItemsPage extends Composite<VerticalLayout> {
 
         HorizontalLayout header = new HorizontalLayout(headerTitle, new FilterResults(itemOverviewDtoListDataProvider));
 
+        headerTitle.getElement().getStyle().set("margin", "0px");
+        headerTitle.getElement().getStyle().set("padding", "12px");
+        headerTitle.setSizeFull();
+        header.setSizeFull();
+
         getContent().add(header, results);
     }
 }

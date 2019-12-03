@@ -17,7 +17,7 @@ public class FilterResults extends Composite<HorizontalLayout> {
 
     private final TextField filter = new TextField();
     private final Button searchTextBtn = new Button(new Icon(VaadinIcon.SEARCH));
-    private final Div filtering = new Div();
+    private final HorizontalLayout filtering = new HorizontalLayout();
     private ListDataProvider<ItemOverviewDto> itemDataProvider;
 
     @Inject
@@ -34,7 +34,5 @@ public class FilterResults extends Composite<HorizontalLayout> {
         filtering.add(filter, searchTextBtn);
 
         getContent().add(filtering);
-//        getContent().getElement().getStyle().set("margin-top", "20");
-//        getContent().getElement().getStyle().set("margin-left", "370px");
     }
 }

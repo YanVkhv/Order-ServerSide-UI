@@ -34,16 +34,18 @@ public class MainLayout extends Composite<VerticalLayout> implements RouterLayou
         customers.addClickListener(e -> UI.getCurrent().navigate(CustomersPage.class));
         nav4.addClickListener(e -> UI.getCurrent().navigate(ItemsPage.class));
 
+        navBar.getStyle().set("margin-left", "auto");
+        header.setSizeFull();
+        orderFooter.setSizeFull();
+        orderIcon.setSizeFull();
+        orderIcon.setHeight("61px");
+        orderIcon.setWidth("255px");
         navBar.add(homepage, create, customers, nav4);
         header.add(orderIcon, navBar);
-
-        navBar.setAlignItems(FlexComponent.Alignment.END);
 
         getContent().add(header);
         getContent().add(content);
         getContent().add(orderFooter);
-        header.setSizeFull();
-        orderFooter.setSizeFull();
         getContent().setMaxWidth("900px");
     }
 
