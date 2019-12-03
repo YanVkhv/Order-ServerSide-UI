@@ -13,7 +13,7 @@ import com.vaadin.flow.router.Route;
 
 import javax.inject.Inject;
 
-@Route(value = "homepage", layout = MainLayout.class)
+@Route(value = "items", layout = MainLayout.class)
 public class DetailsPage extends Composite<VerticalLayout> implements HasUrlParameter<String> {
 
     private ItemApplicationService itemApplicationService;

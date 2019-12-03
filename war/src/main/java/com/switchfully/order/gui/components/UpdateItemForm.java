@@ -83,8 +83,6 @@ public class UpdateItemForm extends Composite<FormLayout> {
         update.setIcon(VaadinIcon.CLIPBOARD_CHECK.create());
         cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         cancel.setIcon(VaadinIcon.CLOSE_SMALL.create());
-        price.setMin(0.1);
-        description.setMaxLength(255);
         description.setPlaceholder("Max. length: 255 characters");
         description.setHeight("200px");
         description.setWidth("790px");
