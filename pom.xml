@@ -24,7 +24,7 @@
         <skipTests>false</skipTests>
         <skip.surefire.tests>${skipTests}</skip.surefire.tests>
         <javax.inject.version>1</javax.inject.version>
-        <postgresql.version>42.2.8</postgresql.version>
+        <postgresql.version>42.2.25</postgresql.version>
         <vaadin.version>14.0.13</vaadin.version>
     </properties>
 
